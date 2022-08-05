@@ -41,6 +41,27 @@ class ItemController extends Controller
     public function store(Request $request)
     {
         //
+
+        $item = new Item();
+
+        $item->name = $request->title;
+        $item->description = $request->description;
+        $item->price = $request->price;
+        $item->category_id = $request->category;
+
+        if ($request->image) {
+            $imageName = time() . '.' . request()->image->getClientOriginalExtension();
+            $input['image'] = $imageName;
+            request()->image->move(public_path('storage/images'), $imageName);
+
+            $item->image = $imageName;
+        }
+            // dd($request->image);
+
+        $item->save();
+
+
+        return response()->json($item, Response::HTTP_CREATED);
     }
 
     /**
