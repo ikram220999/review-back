@@ -15,7 +15,7 @@ class CreateItemReviewsTable extends Migration
     {
         Schema::create('item_reviews', function (Blueprint $table) {
             $table->id();
-            $table->string('comment');
+            $table->integer('rating');
             $table->integer('item_id');
             $table->timestamps();
             $table->softDeletes();
