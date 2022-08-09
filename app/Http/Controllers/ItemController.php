@@ -63,7 +63,7 @@ class ItemController extends Controller
         if ($request->image) {
             $imageName = time() . '.' . request()->image->getClientOriginalExtension();
             $input['image'] = $imageName;
-            request()->image->move(public_path('storage/images'), $imageName);
+            request()->image->move(public_path('storage'), $imageName);
 
             $item->image = $imageName;
         }
