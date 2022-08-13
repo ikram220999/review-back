@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Item;
 use App\Models\Item_review;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -15,18 +16,26 @@ class ItemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
 
-        $item = Item::paginate();
+        $item = DB::table('items');
 
+        if ($request->filter) {
+            $s = json_decode($request->filter);
+            //     // dd($s->category);
+            $item = $item->where('category_id', "=", $s->category);
+        };
+
+        $item = $item->paginate();
 
         foreach($item as $key => $val){
 
             $url = Storage::url($val->image);
 
             $val->image = $url;
+            // dd($key);
         }
 
         return response()->json($item, Response::HTTP_OK);
@@ -53,7 +62,7 @@ class ItemController extends Controller
         //
 
         $item = new Item();
-        $itemReview  = new Item_review();
+        $itemReview = new Item_review();
 
         $item->name = $request->title;
         $item->description = $request->description;
@@ -67,9 +76,8 @@ class ItemController extends Controller
 
             $item->image = $imageName;
         }
-            // dd($request->image);
+        // dd($request->image);
 
-        
         $item->save();
 
         $itemReview->item_id = $item->id;
