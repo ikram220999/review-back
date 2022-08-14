@@ -20,6 +20,7 @@ class CreateItemsTable extends Migration
             $table->double('price');
             $table->integer('category_id')->nullable();
             $table->string('image')->nullable();
+            $table->integer('vote')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });
