@@ -27,4 +27,6 @@ Route::prefix('category')->group(function () {
 Route::prefix('item')->group(function () {
     Route::get('/', [ItemController::class, 'index']);
     Route::post('/store', [ItemController::class, 'store']);
+    Route::get('/vote/up', [ItemController::class, 'voteUp']);
+    Route::get('/vote/down', [ItemController::class, 'voteDown']);
 });

@@ -30,7 +30,7 @@ class ItemController extends Controller
 
         $item = $item->paginate();
 
-        foreach($item as $key => $val){
+        foreach ($item as $key => $val) {
 
             $url = Storage::url($val->image);
 
@@ -86,6 +86,41 @@ class ItemController extends Controller
         $itemReview->save();
 
         return response()->json([$item, $itemReview], Response::HTTP_CREATED);
+    }
+
+    public function voteUp(Request $request)
+    {
+        if ($request->ucbool == "false") {
+            $item = Item::find($request->id);
+            $item->vote = $item->vote + 1;
+
+            $item->save();
+        } else {
+            $item = Item::find($request->id);
+            $item->vote = $item->vote - 1;
+
+            $item->save();
+        }
+            // dd($request->id);
+        return response()->json($item, Response::HTTP_OK);
+
+    }
+
+    public function voteDown(Request $request)
+    {
+        if ($request->dcbool == "false") {
+            $item = Item::find($request->id);
+            $item->vote = $item->vote - 1;
+
+            $item->save();
+        } else {
+            $item = Item::find($request->id);
+            $item->vote = $item->vote + 1;
+
+            $item->save();
+        }
+            // dd($request->id);
+        return response()->json($item, Response::HTTP_OK);
     }
 
     /**
