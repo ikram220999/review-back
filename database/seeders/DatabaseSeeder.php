@@ -41,6 +41,8 @@ class DatabaseSeeder extends Seeder
             'description' => $faker->realText,
             'price' => "2300.00",
             'category_id' => "1",
+            'vote' => '15',
+            'rating' => '4'
         ]);
 
         DB::table('items')->insert([
@@ -48,6 +50,8 @@ class DatabaseSeeder extends Seeder
             'description' => $faker->realText,
             'price' => "5800.00",
             'category_id' => "1",
+            'vote' => '50',
+            'rating' => '3'
         ]);
 
         DB::table('items')->insert([
@@ -55,6 +59,8 @@ class DatabaseSeeder extends Seeder
             'description' => $faker->realText,
             'price' => "4099.00",
             'category_id' => "2",
+            'vote' => '23',
+            'rating' => '5'
         ]);
 
         DB::table('items')->insert([
@@ -62,6 +68,8 @@ class DatabaseSeeder extends Seeder
             'description' => $faker->realText,
             'price' => "10.00",
             'category_id' => "4",
+            'vote' => '97',
+            'rating' => '4'
         ]);
 
         DB::table('items')->insert([
@@ -69,6 +77,8 @@ class DatabaseSeeder extends Seeder
             'description' => $faker->realText,
             'price' => "1200.00",
             'category_id' => "3",
+            'vote' => '56',
+            'rating' => '4'
         ]);
 
     }
