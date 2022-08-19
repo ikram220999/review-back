@@ -23,11 +23,15 @@ class ItemController extends Controller
         $item = DB::table('items');
 
         if ($request->filter) {
-            $s = json_decode($request->filter);
-            //     // dd($s->category);
-            $item = $item->where('category_id', "=", $s->category);
-        };
 
+            $s = json_decode($request->filter);
+            if ($s->category > 0) {
+
+                //     // dd($s->category);
+                $item = $item->where('category_id', "=", $s->category);
+            }
+        };
+        $item = $item->select("*");
         $item = $item->paginate();
 
         foreach ($item as $key => $val) {
@@ -101,7 +105,7 @@ class ItemController extends Controller
 
             $item->save();
         }
-            // dd($request->id);
+        // dd($request->id);
         return response()->json($item, Response::HTTP_OK);
 
     }
@@ -119,7 +123,7 @@ class ItemController extends Controller
 
             $item->save();
         }
-            // dd($request->id);
+        // dd($request->id);
         return response()->json($item, Response::HTTP_OK);
     }
 
