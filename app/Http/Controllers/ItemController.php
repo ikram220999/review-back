@@ -30,6 +30,10 @@ class ItemController extends Controller
                 //     // dd($s->category);
                 $item = $item->where('category_id', "=", $s->category);
             }
+
+            if($s->name){
+                $item = $item->where('name', 'LIKE', '%'.$s->name.'%');
+            }
         };
         $item = $item->select("*");
         $item = $item->paginate();
@@ -81,7 +85,7 @@ class ItemController extends Controller
             $item->image = $imageName;
         }
         // dd($request->image);
-
+        $item->rating = $request->rating;
         $item->save();
 
         $itemReview->item_id = $item->id;
